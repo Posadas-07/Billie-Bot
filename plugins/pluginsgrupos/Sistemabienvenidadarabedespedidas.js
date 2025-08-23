@@ -5,10 +5,8 @@ const { getConfig } = requireFromRoot("db");
 
 // Cache global de admins por chat
 const adminCache = {};
-// ==== HELPERS LID/REAL ====
 const DIGITS = (s = "") => String(s || "").replace(/\D/g, "");
 
-/** Si id es @lid y existe .jid (real), usa el real */
 function lidParser(participants = []) {
   try {
     return participants.map(v => ({
@@ -23,7 +21,6 @@ function lidParser(participants = []) {
   }
 }
 
-/** Con metadata y un JID (real o @lid) → { realJid, lidJid, number } */
 function resolveRealFromMeta(meta, anyJid) {
   const out = { realJid: null, lidJid: null, number: null };
   const raw  = Array.isArray(meta?.participants) ? meta.participants : [];
@@ -50,7 +47,6 @@ function resolveRealFromMeta(meta, anyJid) {
   out.number = DIGITS(out.realJid || "");
   return out;
 }
-// ==== FIN HELPERS ====
 
 const handler = async (conn) => {
   conn.ev.on("group-participants.update", async (update) => {
@@ -176,7 +172,7 @@ const handler = async (conn) => {
       }
 
       // ===============================
-      // 🔰 BIENVENIDA / DESPEDIDA NUEVA
+      // 🔰 BIENVENIDA / DESPEDIDA NUEVA CON EXTERNALADREPLY
       // ===============================
 
       const frasesWelcome = [
@@ -227,94 +223,4 @@ const handler = async (conn) => {
         ctx.fillStyle = '#ffffff';
         ctx.font = 'bold 36px Sans-serif';
         ctx.textAlign = 'center';
-        ctx.fillText(esDespedida ? '𝗛𝗔𝗦𝗧𝗔 𝗣𝗥𝗢𝗡𝗧𝗢' : '¡𝗕𝗜𝗘𝗡𝗩𝗘𝗡𝗜𝗗𝗢!', 365, 360);
-
-        if (textoExtra) {
-          ctx.fillStyle = '#D3D3D3';
-          ctx.font = '24px Sans-serif';
-          ctx.fillText(textoExtra, 360, 400);
-        }
-
-        return canvas.toBuffer();
-      }
-
-      for (const participant of update.participants) {
-        const { realJid, number } = resolveRealFromMeta(metadata, participant);
-        const mentionId = realJid || participant;
-        const mention = `@${number || participant.split("@")[0]}`;
-
-        let perfilURL = "https://cdn.russellxz.click/61198e23.jpeg";
-        try { perfilURL = await conn.profilePictureUrl(participant, "image"); } catch {}
-
-        const totalMiembros = metadata.participants.length;
-        const nombreGrupo = metadata.subject || "Grupo";
-
-        // 🚫 Anti árabe check
-        const isArabic = (antiArabe == 1) && number && arabes.some(cc => number.startsWith(cc));
-        if (update.action === "add" && isArabic) {
-          const info = metadata.participants.find(p => p.id === participant);
-          const isAdmin = info?.admin === "admin" || info?.admin === "superadmin";
-          const isOwner = global.isOwner && (global.isOwner(number) || global.isOwner(mentionId));
-          if (!isAdmin && !isOwner) {
-            await conn.sendMessage(chatId, {
-              text: `🚫 ${mention} tiene un prefijo prohibido y será eliminado.`,
-              mentions: [mentionId]
-            });
-            try { await conn.groupParticipantsUpdate(chatId, [participant], "remove"); } catch {}
-            continue;
-          }
-        }
-
-        // ✅ Bienvenida
-        if (update.action === "add" && welcomeActive == 1) {
-          const fondoBienvenida = 'https://cdn.russellxz.click/d617bf4c.jpeg';
-          const frase = frasesWelcome[Math.floor(Math.random() * frasesWelcome.length)];
-          const textoExtra = frase.replace(/{miembros}/gi, totalMiembros);
-          const imgBuffer = await generarImagenSimple(perfilURL, false, fondoBienvenida, textoExtra);
-
-          const textoFinal = bienvenidaPersonalizada
-            ? bienvenidaPersonalizada.replace(/@user|{usuario}/gi, mention).replace(/{grupo}/gi, nombreGrupo)
-            : `*ゲ◜༅៹ 𝖡𝖨𝖤𝖭𝖵𝖤𝖭𝖨𝖣𝖮 :* ${mention}\n*ゲ◜༅៹ 𝖦𝖱𝖴𝖯𝖮 :* ${nombreGrupo}`;
-
-          await conn.sendMessage(chatId, {
-            image: imgBuffer,
-            caption: textoFinal,
-            mentions: [mentionId]
-          });
-        }
-
-        // ❌ Despedida
-        if (update.action === "remove" && byeActive == 1) {
-          const fondoDespedida = 'https://cdn.russellxz.click/06f6b67b.jpeg';
-          const frase = frasesBye[Math.floor(Math.random() * frasesBye.length)];
-          const textoExtra = frase.replace(/{miembros}/gi, totalMiembros);
-          const imgBuffer = await generarImagenSimple(perfilURL, true, fondoDespedida, textoExtra);
-
-          const textoFinal = despedidaPersonalizada
-            ? despedidaPersonalizada.replace(/@user|{usuario}/gi, mention).replace(/{grupo}/gi, nombreGrupo)
-            : `*ゲ◜༅៹ 𝖲𝖤 𝖥𝖴𝖤 :* ${mention}\n*ゲ◜༅៹ 𝖦𝖱𝖴𝖯𝖮 :* ${nombreGrupo}`;
-
-          await conn.sendMessage(chatId, {
-            image: imgBuffer,
-            caption: textoFinal,
-            mentions: [mentionId]
-          });
-        }
-      }
-
-      // actualizar cache admins
-      const newMeta = await conn.groupMetadata(chatId);
-      adminCache[chatId] = new Set(
-        newMeta.participants
-          .filter(p => p.admin === 'admin' || p.admin === 'superadmin')
-          .map(p => p.id)
-      );
-
-    } catch (err) {
-      console.error("❌ Error en lógica de grupo:", err);
-    }
-  });
-};
-
-handler.run = handler;
-module.exports = handler;
+        ctx.fillText(esDespedida ? '
