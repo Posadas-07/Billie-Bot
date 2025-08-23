@@ -87,9 +87,43 @@ const handler = async (msg, { conn }) => {
     await deleteConfig(chatId, "antiarabe");
   }
 
-  await conn.sendMessage(chatId, {
-    text: `🛡️ AntiÁrabe ha sido *${estado === "on" ? "activado" : "desactivado"}* correctamente en este grupo.`
-  }, { quoted: msg });
+  // fkontak Cholito-xyz (solo para el mensaje de confirmación al activar/desactivar)
+  const fkontak = {
+    key: {
+      participants: "0@s.whatsapp.net",
+      remoteJid: "status@broadcast",
+      fromMe: false,
+      id: "Halo"
+    },
+    message: {
+      productMessage: {
+        product: {
+          productImage: {
+            mimetype: "image/jpeg",
+            jpegThumbnail: await (await fetch("https://iili.io/FCJSFix.jpg")).buffer()
+          },
+          title: "𝖠𝖭𝖳𝖨 𝖠𝖱𝖠𝖡𝖤𝖲",
+          description: ""
+        },
+        businessOwnerJid: "19709001746@s.whatsapp.net"
+      }
+    },
+    participant: "0@s.whatsapp.net"
+  };
+
+  // Diseño solicitado
+  const titulo = "「 𝖠𝖼𝖼𝗂𝗈́𝗇 𝗋𝖾𝖺𝗅𝗂𝗓𝖺𝖽𝖺 ✅ 」";
+  const estadoTxt = estado === "on" ? "𝖠𝖼𝗍𝖾𝖺𝖽𝗈" : "𝖣𝖾𝗌𝖺𝖼𝗍𝗂𝗏𝖺𝖽𝗈"; // fuente estilo
+  const cuerpo =
+`${titulo}
+
+*│┊➺ 𝖢𝗈𝗆𝖺𝗇𝖽𝗈:* 𝖠𝗇𝗍𝗂𝖺𝗋𝖺𝖻𝖾
+*│┊➺ 𝖤𝗌𝗍𝖺𝖽𝗈:* ${estado === "on" ? "𝖠𝖼𝗍𝗂𝗏𝖺𝖽𝗈" : "𝖣𝖾𝗌𝖺𝖼𝗍𝗂𝗏𝖺𝖽𝗈"}
+*│┊➺ 𝖯𝖺𝗋𝖺́:* 𝖤𝗌𝗍𝖾 𝗀𝗋𝗎𝗉𝗈
+*│┊➺ 𝖥𝗎𝗇𝖼𝗂𝗈́𝗇:* 𝖱𝖾𝗌𝗍𝗋𝗂𝗇𝗀𝖾 𝗇𝗎́𝗆𝖾𝗋𝗈 𝖺𝗋𝖺𝖻𝖾 𝖾𝗇 𝖾𝗌𝗍𝖾 𝗀𝗋𝗎𝗉𝗈
+*╰ ∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙ ∙ ∙ ∙ ∙*`;
+
+  await conn.sendMessage(chatId, { text: cuerpo }, { quoted: fkontak });
 
   await conn.sendMessage(chatId, { react: { text: "✅", key: msg.key } }).catch(() => {});
   console.log(`🛡️ AntiÁrabe ${estado.toUpperCase()} guardado en activos.db para ${chatId}`);
