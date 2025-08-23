@@ -5,8 +5,10 @@ const { getConfig } = requireFromRoot("db");
 
 // Cache global de admins por chat
 const adminCache = {};
+// ==== HELPERS LID/REAL ====
 const DIGITS = (s = "") => String(s || "").replace(/\D/g, "");
 
+/** Si id es @lid y existe .jid (real), usa el real */
 function lidParser(participants = []) {
   try {
     return participants.map(v => ({
@@ -21,6 +23,7 @@ function lidParser(participants = []) {
   }
 }
 
+/** Con metadata y un JID (real o @lid) → { realJid, lidJid, number } */
 function resolveRealFromMeta(meta, anyJid) {
   const out = { realJid: null, lidJid: null, number: null };
   const raw  = Array.isArray(meta?.participants) ? meta.participants : [];
@@ -47,6 +50,7 @@ function resolveRealFromMeta(meta, anyJid) {
   out.number = DIGITS(out.realJid || "");
   return out;
 }
+// ==== FIN HELPERS ====
 
 const handler = async (conn) => {
   conn.ev.on("group-participants.update", async (update) => {
@@ -86,7 +90,7 @@ const handler = async (conn) => {
 
       const metadata = await conn.groupMetadata(chatId);
 
-      // 🔒 SISTEMA DE PROTECCIÓN DE ADMINS
+      // 🔒 SISTEMA DE PROTECCIÓN DE ADMINS (igual que antes, no modificado)
       const botId     = conn.user.id.split(':')[0] + '@s.whatsapp.net';
       const configPath = path.resolve('setwelcome.json');
       const data      = fs.existsSync(configPath)
@@ -172,7 +176,7 @@ const handler = async (conn) => {
       }
 
       // ===============================
-      // 🔰 BIENVENIDA / DESPEDIDA CON EXTERNALADREPLY
+      // 🔰 BIENVENIDA / DESPEDIDA NUEVA
       // ===============================
 
       const frasesWelcome = [
@@ -275,15 +279,7 @@ const handler = async (conn) => {
           await conn.sendMessage(chatId, {
             image: imgBuffer,
             caption: textoFinal,
-            mentions: [mentionId],
-            contextInfo: {
-              externalAdReply: {
-                title: "Bienvenida",
-                body: nombreGrupo,
-                sourceUrl: "https://github.com/",
-                thumbnailUrl: perfilURL
-              }
-            }
+            mentions: [mentionId]
           });
         }
 
@@ -301,15 +297,7 @@ const handler = async (conn) => {
           await conn.sendMessage(chatId, {
             image: imgBuffer,
             caption: textoFinal,
-            mentions: [mentionId],
-            contextInfo: {
-              externalAdReply: {
-                title: "Despedida",
-                body: nombreGrupo,
-                sourceUrl: "https://github.com/",
-                thumbnailUrl: perfilURL
-              }
-            }
+            mentions: [mentionId]
           });
         }
       }
