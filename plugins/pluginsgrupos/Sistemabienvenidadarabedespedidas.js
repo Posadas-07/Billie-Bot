@@ -3,8 +3,6 @@ const path = require("path");
 const { createCanvas, loadImage } = require("canvas");
 const { getConfig } = requireFromRoot("db");
 
-// Cache global de admins por chat
-const adminCache = {};
 // ==== HELPERS LID/REAL ====
 const DIGITS = (s = "") => String(s || "").replace(/\D/g, "");
 
@@ -59,16 +57,6 @@ const handler = async (conn) => {
       const isGroup = chatId.endsWith("@g.us");
       if (!isGroup) return;
 
-      // Cache inicial admins
-      if (!adminCache[chatId]) {
-        const oldMeta = await conn.groupMetadata(chatId);
-        adminCache[chatId] = new Set(
-          oldMeta.participants
-            .filter(p => p.admin === 'admin' || p.admin === 'superadmin')
-            .map(p => p.id)
-        );
-      }
-
       const welcomeActive = await getConfig(chatId, "welcome");
       const byeActive = await getConfig(chatId, "despedidas");
       const antiArabe = await getConfig(chatId, "antiarabe");
@@ -90,91 +78,6 @@ const handler = async (conn) => {
 
       const metadata = await conn.groupMetadata(chatId);
 
-      // 🔒 SISTEMA DE PROTECCIÓN DE ADMINS (igual que antes, no modificado)
-      const botId     = conn.user.id.split(':')[0] + '@s.whatsapp.net';
-      const configPath = path.resolve('setwelcome.json');
-      const data      = fs.existsSync(configPath)
-        ? JSON.parse(fs.readFileSync(configPath, 'utf-8'))
-        : {};
-      const whiteList = data.lista || [];
-      data[chatId] = data[chatId] || {};
-      data[chatId].blacklistAdmins = data[chatId].blacklistAdmins || {};
-      const blacklist = data[chatId].blacklistAdmins;
-
-      if (update.action === 'demote' && update.participants?.length) {
-        const actor  = update.author;
-        const target = update.participants[0];
-        if (!whiteList.includes(actor) && actor && target && actor !== target && actor !== botId) {
-          const now = Date.now();
-          blacklist[actor] = now + 24 * 60 * 60 * 1000;
-          fs.writeFileSync(configPath, JSON.stringify(data, null, 2));
-          await conn.groupParticipantsUpdate(chatId, [actor], 'demote').catch(() => {});
-          await conn.sendMessage(chatId, {
-            text: `
-🚨 *VIOLACIÓN DE POLÍTICA DE ADMINISTRACIÓN*
-⚠️ El admin @${actor.split('@')[0]} quitó permisos de admin a @${target.split('@')[0]}.
-🕒 Su rol ha sido revocado por *24 horas*.
-🔰 Usa *\/addlista @usuario* para eximir.
-🧯 Usa *\/restpro @${actor.split('@')[0]}* para restaurar.
-`.trim(),
-            mentions: [actor, target]
-          });
-        }
-      }
-
-      if (update.action === 'remove' && update.participants?.length) {
-        const actor  = update.author;
-        const target = update.participants[0];
-        if (!whiteList.includes(actor) && actor && target && actor !== target && actor !== botId) {
-          const oldAdmins = adminCache[chatId] || new Set();
-          if (oldAdmins.has(target)) {
-            const now = Date.now();
-            blacklist[actor] = now + 24 * 60 * 60 * 1000;
-            fs.writeFileSync(configPath, JSON.stringify(data, null, 2));
-            await conn.groupParticipantsUpdate(chatId, [actor], 'demote').catch(() => {});
-            await conn.sendMessage(chatId, {
-              text: `
-🚨 *ADMINISTRADOR EXPULSADO*
-❌ El admin @${actor.split('@')[0]} eliminó a @${target.split('@')[0]} del grupo.
-🕒 Su rol ha sido revocado por *24 horas*.
-🔰 Usa *\/addlista @usuario* para eximir.
-`.trim(),
-              mentions: [actor, target]
-            });
-          }
-        }
-      }
-
-      for (const id of update.participants || []) {
-        const pInfo = metadata.participants.find(p => p.id === id);
-        const isNowAdmin = pInfo?.admin === 'admin' || pInfo?.admin === 'superadmin';
-        const until = blacklist[id];
-        if (isNowAdmin && until && Date.now() < until && !whiteList.includes(id)) {
-          await conn.groupParticipantsUpdate(chatId, [id], 'demote').catch(() => {});
-          await conn.sendMessage(chatId, {
-            text: `
-🚫 @${id.split('@')[0]} está castigado.
-⏳ No podrá ser admin hasta que pasen 24 horas.
-🔰 Usa *\/addlista @${id.split('@')[0]}* para eximir.
-`.trim(),
-            mentions: [id]
-          });
-        }
-      }
-
-      if (update.action === "promote" && update.participants?.length) {
-        const actor = update.author;
-        const target = update.participants[0];
-        if (actor && target) {
-          const texto = `
-╭──『 👑 *NUEVO ADMIN* 』─◆
-│ 👤 Usuario: @${target.split("@")[0]}
-│ ✅ Ascendido por: @${actor.split("@")[0]}
-╰────────────────────◆`.trim();
-          await conn.sendMessage(chatId, { text: texto, mentions: [actor, target] });
-        }
-      }
-
       // ===============================
       // 🔰 BIENVENIDA / DESPEDIDA NUEVA
       // ===============================
@@ -190,7 +93,7 @@ const handler = async (conn) => {
       const frasesBye = [
         "𝖴𝗇 𝖺𝗅𝗆𝖺 𝗆𝖾𝗇𝗈𝗌. 𝖠𝗁𝗈𝗋𝖺 𝗊𝗎𝖾𝖽𝖺𝗆𝗈𝗌 {miembros}.",
         "𝖭𝗈𝗌 𝖺𝖻𝖺𝗇𝖽𝗈𝗇𝖺 𝗈𝗍𝗋𝗈 𝗌𝗈𝗅𝖽𝖺𝗱𝗈 𝖼𝖺í𝖽𝗈.",
-        "𝖲𝖾 𝖿𝗎𝖾... 𝗇𝗂 𝗇𝗈𝗍𝖺𝗆𝗈𝗌 𝗊𝗎𝖾 𝖾𝗌𝗍𝖺𝖻𝖺."
+        "𝖲𝖾 𝖿𝗎𝖾... 𝗇𝗂 𝗇𝗈𝗍𝖺𝗆𝗈𝗌 𝗊𝗎𝗂 𝖾𝗌𝗍𝖺𝖻𝖺."
       ];
 
       async function generarImagenSimple(profilePicUrl, esDespedida, fondoPersonalizado, textoExtra = '') {
@@ -301,14 +204,6 @@ const handler = async (conn) => {
           });
         }
       }
-
-      // actualizar cache admins
-      const newMeta = await conn.groupMetadata(chatId);
-      adminCache[chatId] = new Set(
-        newMeta.participants
-          .filter(p => p.admin === 'admin' || p.admin === 'superadmin')
-          .map(p => p.id)
-      );
 
     } catch (err) {
       console.error("❌ Error en lógica de grupo:", err);
