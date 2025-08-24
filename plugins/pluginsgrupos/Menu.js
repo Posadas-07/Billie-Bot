@@ -140,7 +140,7 @@ const handler = async (msg, { conn }) => {
 `.trim();
 
 await conn.sendMessage2(chatId, {
-    image: { url: "https://cdn.russellxz.click/a289f34c.jpg" },
+    image: { url: "https://cdn.russellxz.click/ddd024a4.jpeg" },
     caption
 }, msg);
 };
