@@ -20,21 +20,20 @@ const handler = async (msg, { conn }) => {
 
   const caption = `
 ╔════════════════════╗
-║🤖 *ALL MENU LA SUKI BOT*
+║MENU COMPLETO DE DANVERS BOT
 ╚════════════════════╝
 
-🧠 *Bot creado desde cero.*
-🔧 *Total comandos activos:* ${total}
+🔧 *Cantidad de comandos:* ${total}
 🔑 *Prefijo actual:* ${prefijo}
 
 📦 *Lista de comandos:*
-${todosLosComandos.map(c => `➤ ${prefijo}${c}`).join("\n")}
+${todosLosComandos.map(c => `➩ ${prefijo}${c}`).join("\n")}
   
-💫 *Gracias por usar suki Omega.*
+*Danvers IA Bot
 `.trim();
 
   return conn.sendMessage2(chatId, {
-    image: { url: "https://cdn.russellxz.click/40df9bcb.jpeg" },
+    image: { url: "https://cdn.russellxz.click/932aaae6.jpeg" },
     caption
   }, msg);
 };
