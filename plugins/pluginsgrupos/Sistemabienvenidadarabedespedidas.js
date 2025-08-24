@@ -79,9 +79,21 @@ const handler = async (conn) => {
       const metadata = await conn.groupMetadata(chatId);
 
       // ===============================
-      // 🔰 BIENVENIDA / DESPEDIDA NUEVA
+      // Texto predeterminado que se puede personalizar con setwelcome / setbye
       // ===============================
+      const DEFAULT_WELCOME = `⏤͟͟͞𝖡𝗂𝖾𝗇𝗏𝖾𝗇𝗂𝖽𝗈 𝖺𝗅 𝗀𝗋𝗎𝗉𝗈 𝗇𝖺𝖽𝗂𝖾 𝗍𝖾 𝗅𝗅𝖺𝗆𝗈́ 𝗉𝖾𝗋𝗈 𝖻𝗎𝖾𝗇𝗈 𝗍𝗈𝖼𝗮 𝗌𝗈𝗉𝗈𝗋𝗍𝖺𝗋 ⏤͟͟͞͞
 
+> \`\`\`𝖯𝗎𝖾𝖽𝖾𝗌 𝖾𝖽𝗂𝗍𝖺𝗋 𝗅𝖺 𝖻𝗂𝖾𝗇𝗏𝖾𝗇𝗂𝖽𝖺 𝗎𝗌𝖺𝗇𝖽𝗈 .𝗌𝖾𝗍𝗐𝖾𝗅𝖼𝗈𝗆𝖾\`\`\`
+> \`\`\`® 𝗉𝗈𝗐𝖾𝗋𝖾𝖽 𝖻𝗒 𝖢𝗁𝗈𝗅𝗂𝗍𝗈.𝗑𝗒𝗓 ✓\`\`\``;
+
+      const DEFAULT_BYE = `⏤͟͟͞𝖠𝖽𝗂𝗈𝗌, 𝗇𝗈 𝗍𝖾 𝗏𝖺𝗆𝗈𝗌 𝖺 𝖾𝗑𝗍𝗋𝖺𝗇̃𝖺𝗋 𝗉𝖾𝗋𝗈 𝗀𝗋𝖺𝖼𝗂𝖺𝗌 𝗉𝗈𝗋 𝗂𝗇𝗍𝖾𝗇𝗍𝖺𝗋𝗅𝗈 ⏤͟͟͞͞
+
+> \`\`\`𝖯𝗎𝖾𝖽𝖾𝗌 𝖾𝖽𝗂𝗍𝖺𝗋 𝗅𝖺 𝖽𝖾𝗌𝗉𝖾𝖽𝗂𝖽𝖺 𝗎𝗌𝖺𝗇𝖽𝗈 .𝗌𝖾𝗍𝖻𝗒𝖾\`\`\`
+> \`\`\`® 𝗉𝗈𝗐𝖾𝗋𝖾𝖽 𝖻𝗒 𝖼𝗁𝗈𝗅𝗂𝗍𝗈.𝗑𝗒𝗓 ✓\`\`\``;
+
+      // ===============================
+      // Textos aleatorios dentro de la imagen (canvas)
+      // ===============================
       const frasesWelcome = [
         "𝖣𝗂𝗌𝖿𝗋𝗎𝗍𝖺 𝗍𝗎 𝖾𝗌𝗍𝖺𝖽𝗂́𝖺. 𝖠𝗁𝗈𝗋𝖺 𝗌𝗈𝗆𝗈𝗌 {miembros} 𝗆𝗂𝖾𝗆𝖻𝗋𝗈𝗌.",
         "𝖫𝖾𝖾 𝗅𝖺𝗌 𝗋𝖾𝗀𝗅𝖺𝗌. 𝖫𝗎𝖾𝗀𝗈 𝗂𝗀𝗇𝗈́𝗋𝖺𝗅𝖺𝗌 𝖼𝗈𝗆𝗈 𝗍𝗈𝖽𝗈𝗌.",
@@ -92,7 +104,7 @@ const handler = async (conn) => {
 
       const frasesBye = [
         "𝖴𝗇 𝖺𝗅𝗆𝖺 𝗆𝖾𝗇𝗈𝗌. 𝖠𝗁𝗈𝗋𝖺 𝗊𝗎𝖾𝖽𝖺𝗆𝗈𝗌 {miembros}.",
-        "𝖭𝗈𝗌 𝖺𝖻𝖺𝗇𝖽𝗈𝗇𝖺 𝗈𝗍𝗋𝗈 𝗌𝗈𝗅𝖽𝖺𝗱𝗈 𝖼𝖺í𝖽𝗈.",
+        "𝖭𝗈𝗌 𝖺𝖻𝖺𝗇𝖽𝗈𝗇𝖺 𝗈𝗍𝗋𝗈 𝗌𝗈𝗅𝖽𝖺𝗉𝗈 𝖼𝖺í𝖽𝗈.",
         "𝖲𝖾 𝖿𝗎𝖾... 𝗇𝗂 𝗇𝗈𝗍𝖺𝗆𝗈𝗌 𝗊𝗎𝗂 𝖾𝗌𝗍𝖺𝖻𝖺."
       ];
 
@@ -155,17 +167,12 @@ const handler = async (conn) => {
         // 🚫 Anti árabe check
         const isArabic = (antiArabe == 1) && number && arabes.some(cc => number.startsWith(cc));
         if (update.action === "add" && isArabic) {
-          const info = metadata.participants.find(p => p.id === participant);
-          const isAdmin = info?.admin === "admin" || info?.admin === "superadmin";
-          const isOwner = global.isOwner && (global.isOwner(number) || global.isOwner(mentionId));
-          if (!isAdmin && !isOwner) {
-            await conn.sendMessage(chatId, {
-              text: `🚫 ${mention} tiene un prefijo prohibido y será eliminado.`,
-              mentions: [mentionId]
-            });
-            try { await conn.groupParticipantsUpdate(chatId, [participant], "remove"); } catch {}
-            continue;
-          }
+          await conn.sendMessage(chatId, {
+            text: `🚫 ${mention} tiene un prefijo prohibido y será eliminado.`,
+            mentions: [mentionId]
+          });
+          try { await conn.groupParticipantsUpdate(chatId, [participant], "remove"); } catch {}
+          continue;
         }
 
         // ✅ Bienvenida
@@ -177,7 +184,7 @@ const handler = async (conn) => {
 
           const textoFinal = bienvenidaPersonalizada
             ? bienvenidaPersonalizada.replace(/@user|{usuario}/gi, mention).replace(/{grupo}/gi, nombreGrupo)
-            : `*ゲ◜༅៹ 𝖡𝖨𝖤𝖭𝖵𝖤𝖭𝖨𝖣𝖮 :* ${mention}\n*ゲ◜༅៹ 𝖦𝖱𝖴𝖯𝖮 :* ${nombreGrupo}`;
+            : `*ゲ◜༅៹ 𝖡𝖨𝖤𝖭𝖵𝖤𝖭𝖨𝖣𝖮 :* ${mention}\n*ゲ◜༅៹ 𝖦𝖱𝖴𝖯𝖮 :* ${nombreGrupo}\n\n${DEFAULT_WELCOME}`;
 
           await conn.sendMessage(chatId, {
             image: imgBuffer,
@@ -193,13 +200,13 @@ const handler = async (conn) => {
           const textoExtra = frase.replace(/{miembros}/gi, totalMiembros);
           const imgBuffer = await generarImagenSimple(perfilURL, true, fondoDespedida, textoExtra);
 
-          const textoFinal = despedidaPersonalizada
+          const textoFinalBye = despedidaPersonalizada
             ? despedidaPersonalizada.replace(/@user|{usuario}/gi, mention).replace(/{grupo}/gi, nombreGrupo)
-            : `*ゲ◜༅៹ 𝖲𝖤 𝖥𝖴𝖤 :* ${mention}\n*ゲ◜༅៹ 𝖦𝖱𝖴𝖯𝖮 :* ${nombreGrupo}`;
+            : `*ゲ◜༅៹ 𝖲𝖤 𝖥𝖴𝖤 :* ${mention}\n*ゲ◜༅៹ 𝖦𝖱𝖴𝖯𝖮 :* ${nombreGrupo}\n\n${DEFAULT_BYE}`;
 
           await conn.sendMessage(chatId, {
             image: imgBuffer,
-            caption: textoFinal,
+            caption: textoFinalBye,
             mentions: [mentionId]
           });
         }
