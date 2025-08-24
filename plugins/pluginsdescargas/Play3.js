@@ -34,7 +34,7 @@ const handler = async (msg, { conn, text }) => {
                  `📅 *Publicado:* ${publish}\n` +
                  `🔥 *Popularidad:* ${popularity}\n` +
                  `🔗 *Enlace:* ${url}\n\n` +
-                 `✨ *La Suki Bot está enviando tu música...*`;
+                 `✨ *enviando tu música...*`;
 
     await conn.sendMessage(chatId, {
       image: { url: image },
