@@ -43,10 +43,7 @@ const handler = async (msg, { conn }) => {
     return;
   }
 
-  const caption = `╔════════════════╗
-     💠 𝙱𝙸𝙴𝙽𝚅𝙴𝙽𝙸𝙳𝙾 💠
-╚════════════════╝
-*𝐴𝑙 𝑚𝑒𝑛𝑢 𝑑𝑒 𝑔𝑟𝑢𝑝𝑜 𝑑𝑒 𝐿𝑎 𝑆𝑢𝑘𝑖 𝐵𝑜𝑡*
+  const caption = `𝗗𝗔𝗡𝗩𝗘𝗥𝗦 𝗕𝗢𝗧, 𝗠𝗘𝗡𝗨́ 𝗣𝗔𝗥𝗔 𝗚𝗥𝗨𝗣𝗢𝗦
 
 🛠️ *CONFIGURACIONES*
 ╭─────◆
@@ -97,13 +94,13 @@ const handler = async (msg, { conn }) => {
 │๛ ${pref}cerrargrupo
 ╰─────◆
 
-🤖 *La Suki Bot - Panel de control grupal*
+🤖 *Danvers Bot control para tu grupo*
 `.trim();
 
   await conn.sendMessage2(
     chatId,
     {
-      video: { url: "https://cdn.russellxz.click/29906d1e.mp4" },
+      image: { url: "https://cdn.russellxz.click/e626f7ef.jpeg" },
       gifPlayback: true,
       caption
     },
