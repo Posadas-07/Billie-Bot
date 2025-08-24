@@ -139,11 +139,10 @@ const handler = async (msg, { conn }) => {
 ✨ Gracias por usar *La Suki Bot*. Eres adorable 💖
 `.trim();
 
-  await conn.sendMessage2(chatId, {
-    video: { url: "https://cdn.russellxz.click/a289f34c.mp4" },
-    gifPlayback: true,
+await conn.sendMessage2(chatId, {
+    image: { url: "https://cdn.russellxz.click/a289f34c.jpg" },
     caption
-  }, msg);
+}, msg);
 };
 
 handler.command = ["menu"];
