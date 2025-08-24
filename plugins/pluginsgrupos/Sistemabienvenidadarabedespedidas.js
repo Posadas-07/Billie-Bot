@@ -363,7 +363,7 @@ ${despedidaPersonalizada}`,
 
             if (modo === "video") {
               await conn.sendMessage(chatId, {
-                video: { url: "https://cdn.russellxz.click/6a4bd220.mp4" },
+                video: { url: "https://cdn.russellxz.click/09c22a33.mp4" },
                 caption: `👋 ${mention}
 
 ${mensaje}`,
