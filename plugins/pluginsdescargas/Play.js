@@ -40,8 +40,7 @@ module.exports = async (msg, { conn, text }) => {
   const viewsFmt = views.toLocaleString();
 
   const caption = `
-
-❦𝑳𝑨 𝑺𝑼𝑲𝑰 𝑩𝑶𝑻❦
+𝐃𝐚𝐧𝐯𝐞𝐫𝐬 𝐁𝐨𝐭 𝐃𝐨𝐰𝐧𝐥𝐨𝐚𝐝𝐞𝐫
 
 📀𝙸𝚗𝚏𝚘 𝚍𝚎𝚕 𝚟𝚒𝚍𝚎𝚘:
 
@@ -56,8 +55,6 @@ module.exports = async (msg, { conn, text }) => {
 ☛ ❤️ Video MP4     (2 / video)
 ☛ 📄 Audio Doc     (4 / audiodoc)
 ☛ 📁 Video Doc     (3 / videodoc)
- 
-❦𝑳𝑨 𝑺𝑼𝑲𝑰 𝑩𝑶𝑻❦
 `.trim();
 
   // envía preview
@@ -199,7 +196,7 @@ async function downloadVideo(conn, job, asDocument, quoted) {
     [asDocument ? "document" : "video"]: fs.readFileSync(file),
     mimetype: "video/mp4",
     fileName: `${title}.mp4`,
-    caption: asDocument ? undefined : `🎬 𝐀𝐪𝐮𝐢́ 𝐭𝐢𝐞𝐧𝐞𝐬 𝐭𝐮 𝐯𝐢𝐝𝐞𝐨~ 💫\n© 𝐋𝐚 𝐒𝐮𝐤𝐢 𝐁𝐨𝐭`
+    caption: asDocument ? undefined : `🎬 𝐀𝐪𝐮𝐢́ 𝐭𝐢𝐞𝐧𝐞𝐬 𝐭𝐮 𝐯𝐢𝐝𝐞𝐨~ 💫\n© 𝐃𝐚𝐧𝐯𝐞𝐫𝐬 𝐁𝐨𝐭`
   }, { quoted });
   fs.unlinkSync(file);
 }
