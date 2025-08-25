@@ -246,7 +246,7 @@ const handler = async (conn) => {
           }
 
           await conn.sendMessage(chatId, {
-            video: { url: "https://cdn.russellxz.click/09c22a33.mp4" },
+            video: { url: "https://cdn.russellxz.click/7adfbd24.mp4" },
             caption: `👋 ${mention}\n\n${despedidaPersonalizada || "¡Hasta luego! 😢"}`,
             mentions: [mentionId]
           });
