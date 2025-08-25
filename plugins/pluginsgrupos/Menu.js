@@ -120,18 +120,39 @@ const handler = async (msg, { conn }) => {
 ╰─────◆
 
 ╭───➻𝗛𝗘𝗥𝗥𝗔𝗠𝗜𝗘𝗡𝗧𝗔𝗦 🛠️
-│
 │➼ ${pref}ver / perfil / get / xxx
 │➼ ${pref}tourl / whatmusic
 ╰─────◆
 
 ╭───➻𝗠𝗜𝗡𝗜 𝗝𝗨𝗘𝗚𝗢𝗦 🎮👾
-│
-│➼ ${pref}verdad / reto
+│➼ ${pref}top 
+│➼ ${pref}verdad 
+│➼ ${pref}reto
 │➼ ${pref}personalidad
-│➼ ${pref}parejas / ship
-│➼ ${pref}kiss / topkiss
-│➼ ${pref}slap / topslap
+│➼ ${pref}parejas
+│➼ ${pref}ship
+│➼ ${pref}kiss 
+│➼ ${pref}ropkiss
+│➼ ${pref}slap
+│➼ ${pref}topslap
+│➼ ${pref}puto
+│➼ ${pref}puta
+│➼ ${pref}manco
+│➼ ${pref}manca
+│➼ ${pref}negro
+│➼ ${pref}neegra
+│➼ ${pref}negro
+│➼ ${pref}cachudo
+│➼ ${pref}cachuda
+│➼ ${pref}pajero
+│➼ ${pref}pajera
+│➼ ${pref}adoptado
+│➼ ${pref}adoptada
+│➼ ${pref}peruano 
+│➼ ${pref}peruana
+│➼ ${pref}feo
+│➼ ${pref}fea
+│➼ ${pref}gay
 ╰─────◆
 `.trim();
 
