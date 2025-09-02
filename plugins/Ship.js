@@ -44,7 +44,7 @@ const handler = async (msg, { conn }) => {
                     `❤️ *Pareja:* @${user1.split("@")[0]} 💕 @${user2.split("@")[0]}\n` +
                     `🔮 *Compatibilidad:* *${porcentaje}%*\n` +
                     `📜 ${frase}\n\n` +
-                    `💍 *¿Deberían casarse?* 💌\n────────────\n👩‍❤️‍👨 _La Suki Bot_`;
+                    `💍 *¿Deberían casarse?* 💌\n────────────\n👩‍❤️‍👨 _Michi Ice_`;
 
     await conn.sendMessage(chatId, {
       text: mensaje,
