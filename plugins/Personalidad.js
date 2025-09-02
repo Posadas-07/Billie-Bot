@@ -45,7 +45,7 @@ const handler = async (msg, { conn }) => {
       msgTexto += `*${atr}:* ${val}%\n${barra}\n\n`;
     }
 
-    msgTexto += "📊 *Datos generados aleatoriamente. ¿Lo representa?* 🤔\n\n────────────\n🤖 _La Suki Bot_";
+    msgTexto += "📊 *Datos generados aleatoriamente. ¿Lo representa?* 🤔\n\n────────────\n🤖 _Michi Ice_";
 
     let profilePic = "https://cdn.dorratz.com/files/1741338863359.jpg";
     try {
