@@ -27,5 +27,5 @@ const handler = async (msg, { conn }) => {
   }
 };
 
-handler.command = ["linkgrupo"];
+handler.command = ["link"];
 module.exports = handler;
