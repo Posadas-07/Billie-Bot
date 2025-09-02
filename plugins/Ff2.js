@@ -56,7 +56,7 @@ const handler = async (msg, { conn }) => {
       mimetype: 'audio/mpeg',
       fileName: `audio_reparado.mp3`,
       ptt: audioMsg?.ptt || false,
-      caption: `✅ *Audio reparado exitosamente*\n⏱️ *Tiempo de reparación:* ${endTime}s\n\n🎧 *Procesado por La Suki Bot*`
+      caption: `✅ *Audio reparado exitosamente*\n⏱️ *Tiempo de reparación:* ${endTime}s\n\n🎧 *Procesado por La Michi Ice*`
     }, { quoted: msg });
 
     fs.unlinkSync(inputPath);
