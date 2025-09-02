@@ -37,7 +37,7 @@ const handler = async (msg, { conn, args, command }) => {
     for (const imageUrl of images.slice(0, 4)) {
       await conn.sendMessage(chatId, {
         image: { url: imageUrl },
-        caption: `🖼️ *Imagen generada para:* ${userMention}\n📌 *Prompt:* ${prompt}\n\n🍧 *API:* api.dorratz.com\n────────────\n🤖 _La Suki Bot_`,
+        caption: `🖼️ *Imagen generada para:* ${userMention}\n📌 *Prompt:* ${prompt}\n\n🍧 *API:* api.dorratz.com\n────────────\n🤖 _Michi Ice_`,
         mentions: [participant]
       }, { quoted: msg });
     }
