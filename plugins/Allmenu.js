@@ -20,7 +20,7 @@ const handler = async (msg, { conn }) => {
 
   const caption = `
 ╔════════════════════╗
-║MENU COMPLETO DE DANVERS BOT
+║MENU COMPLETO DE MICHI ICE 
 ╚════════════════════╝
 
 🔧 *Cantidad de comandos:* ${total}
