@@ -22,7 +22,7 @@ const handler = async (msg, { conn, args }) => {
 
   if (!newName) {
     await conn.sendMessage(chatId, {
-      text: "📛 *Debes escribir el nuevo nombre que deseas para el bot.*\n\nEjemplo:\n.botname Suki Bot"
+      text: "📛 *Debes escribir el nuevo nombre que deseas para el bot.*\n\nEjemplo:\n.botname MICHI ICE"
     }, { quoted: msg });
     return;
   }
