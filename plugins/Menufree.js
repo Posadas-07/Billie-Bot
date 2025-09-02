@@ -30,7 +30,7 @@ const handler = async (msg, { conn }) => {
 
 🎮 *Sistema personalizado para clanes FF*
 
-🤖 *Danvers bot Free Fire*`.trim();
+🤖 *Michi ice Free Fire*`.trim();
 
   await conn.sendMessage2(chatId, {
     image: { url: 'https://cdn.russellxz.click/7a65816d.jpeg' },
