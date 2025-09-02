@@ -49,7 +49,7 @@ ${
 `.trim();
 
   await conn.sendMessage2(chatId, {
-    image: { url: 'https://cdn.russellxz.click/4f20b296.jpeg' },
+    image: { url: 'https://cdn.russellxz.click/7a65816d.jpeg' },
     gifPlayback: true,
     caption
   }, msg);
