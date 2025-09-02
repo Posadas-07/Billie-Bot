@@ -39,8 +39,7 @@ module.exports = async (msg, { conn, text }) => {
   const { url: videoUrl, title, timestamp: duration, views, author } = video;
   const viewsFmt = views.toLocaleString();
 
-  const caption = `
-𝐃𝐚𝐧𝐯𝐞𝐫𝐬 𝐁𝐨𝐭 𝐃𝐨𝐰𝐧𝐥𝐨𝐚𝐝𝐞𝐫
+  const caption = `Chimi Ice Download 
 
 📀𝙸𝚗𝚏𝚘 𝚍𝚎𝚕 𝚟𝚒𝚍𝚎𝚘:
 
