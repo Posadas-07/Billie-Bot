@@ -4,7 +4,7 @@ const handler = async (msg, { conn }) => {
 
   await conn.sendMessage2(chatId, { react: { text: "📋", key: msg.key } }, msg);
 
-  const texto = `*DANVERS BOT*
+  const texto = `*ᴍɪᴄʜɪ ɪᴄᴇ*
 
 𖠁𝗠𝗘𝗡𝗨 𝗙𝗥𝗘𝗘 𝗙𝗜𝗥𝗘𖠁
 𖠁𝗣𝗿𝗲𝗳𝗶𝗷𝗼 𝗔𝗰𝘁𝘂𝗮𝗹: 『 ${pref} 』
@@ -13,10 +13,6 @@ const handler = async (msg, { conn }) => {
 🍉 *MAPAS*
 ╭─────◆
 │๛ ${pref}mapas
-╰─────◆
-
-📃 *REGLAS*
-╭─────◆
 │๛ ${pref}reglas
 │๛ ${pref}setreglas
 ╰─────◆
@@ -37,7 +33,7 @@ const handler = async (msg, { conn }) => {
 🤖 *Danvers bot Free Fire*`.trim();
 
   await conn.sendMessage2(chatId, {
-    image: { url: 'https://cdn.russellxz.click/4472e505.jpeg' },
+    image: { url: 'https://cdn.russellxz.click/7a65816d.jpeg' },
     caption: texto
   }, msg);
 };
