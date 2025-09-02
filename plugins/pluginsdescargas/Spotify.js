@@ -34,7 +34,7 @@ const handler = async (msg, { conn, args, command }) => {
       `𖠁 *Título:* ${song.title}\n` +
       `𖠁 *Artista:* ${song.artist.name}\n` +
       `𖠁 *Duración:* ${song.duration}\n` +
-      `𖠁 *Enlace:* ${song.url}\n\n────────────\n🎧 _𝐃𝐚𝐧𝐯𝐞𝐫𝐬 𝐁𝐨𝐭_`;
+      `𖠁 *Enlace:* ${song.url}\n\n────────────\n🎧 _Chimi Ice_`;
 
     // Enviar miniatura con información
     await conn.sendMessage(chatId, {
