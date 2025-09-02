@@ -76,8 +76,8 @@ const handler = async (msg, { conn, args }) => {
     const mentionList = mentionIds.map(id => `➤ @${id.split("@")[0]}`).join("\n");
     const extraMsg = (args || []).join(" ");
 
-    let finalMsg  = `╭─⌈ 🔊 𝐓𝐀𝐆𝐀𝐋𝐋 𝐌𝐎𝐃𝐄 ⌋──╮\n`;
-        finalMsg += `│ 🤖 *✧ Sᵘᵏⁱ 3.0 ᴮᵒᵗ ✧*\n`;
+    let finalMsg  = `╭─⌈ 🔊 MENCIONANDO... ⌋──╮\n`;
+        finalMsg += `│ 🤖 *✧ CHIMI ICE ✧*\n`;
         finalMsg += `│ 👤 *Invocador:* @${senderDigits}\n`;
     if (extraMsg.length > 0) {
         finalMsg += `│ 💬 *Mensaje:* ${extraMsg}\n`;
@@ -87,7 +87,7 @@ const handler = async (msg, { conn, args }) => {
         finalMsg += mentionList;
 
     await conn.sendMessage(chatId, {
-      image: { url: "https://cdn.russellxz.click/034af9ef.jpeg" },
+      image: { url: "https://cdn.russellxz.click/7a65816d.jpeg" },
       caption: finalMsg,
       mentions: mentionIds
     }, { quoted: msg });
