@@ -58,7 +58,7 @@ const handler = async (msg, { conn, args, command }) => {
       }, { quoted: msg });
     }
 
-    const caption = `🎥 *𝑽𝒊𝒅𝒆𝒐 𝒅𝒆 𝑭𝒂𝒄𝒆𝒃𝒐𝒐𝒌 𝒑𝒓𝒐𝒄𝒆𝒔𝒂𝒅𝒐 𝒆𝒙𝒊𝒕𝒐𝒔𝒂𝒎𝒆𝒏𝒕𝒆*\n\n𖠁 *Resoluciones disponibles:*\n${results.map(v => `𖠁 ${v.resolution}`).join("\n")}\n𖠁 *API:* api.dorratz.com\n\n────────────\n🤖 _Danvers Bot_`;
+    const caption = `🎥 *𝑽𝒊𝒅𝒆𝒐 𝒅𝒆 𝑭𝒂𝒄𝒆𝒃𝒐𝒐𝒌 𝒑𝒓𝒐𝒄𝒆𝒔𝒂𝒅𝒐 𝒆𝒙𝒊𝒕𝒐𝒔𝒂𝒎𝒆𝒏𝒕𝒆*\n\n𖠁 *Resoluciones disponibles:*\n${results.map(v => `𖠁 ${v.resolution}`).join("\n")}\n𖠁 *API:* api.dorratz.com\n\n────────────\n🤖 _Chimi Ice_`;
 
     await conn.sendMessage(chatId, {
       video: fs.readFileSync(filePath),
