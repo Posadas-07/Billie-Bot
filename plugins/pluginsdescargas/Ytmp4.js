@@ -73,7 +73,7 @@ const handler = async (msg, { conn, text, usedPrefix, command }) => {
       `𖠁 *Tamaño:* ${videoData.size}\n` +
       `𖠁 *Calidad:* ${videoData.quality}\n` +
       `𖠁 *Link:* https://youtu.be/${videoData.id}\n\n` +
-      `𖠁 *¿No se reproduce?* Usa _${pref}ff_\n\n𖠁 *Procesado por Danvers Bot*`;
+      `𖠁 *¿No se reproduce?* Usa _${pref}ff_\n\n𖠁 *Procesado por Chimi Ice*`;
 
     await conn.sendMessage(chatId, {
       video: fs.readFileSync(filePath),
