@@ -43,10 +43,9 @@ const handler = async (msg, { conn }) => {
     return;
   }
 
-  const caption = `𝗗𝗔𝗡𝗩𝗘𝗥𝗦 𝗕𝗢𝗧, 𝗠𝗘𝗡𝗨́ 𝗣𝗔𝗥𝗔 𝗚𝗥𝗨𝗣𝗢𝗦
+  const caption = `ᴍɪᴄʜɪ ɪᴄᴇ ᴍᴇɴᴜ ɢʀᴜᴘᴏ
 
-🛠️ *CONFIGURACIONES*
-╭─────◆
+╭───🛠️ *CONFIGURACIONES*
 │๛ ${pref}infogrupo
 │๛ ${pref}setinfo
 │๛ ${pref}setname
@@ -68,8 +67,7 @@ const handler = async (msg, { conn }) => {
 │๛ ${pref}delco / elimina comandos en s
 ╰─────◆
 
-🛡️ *ADMINISTRACIÓN*
-╭─────◆
+╭────🛡️ *ADMINISTRACIÓN*
 │๛ ${pref}daradmins
 │๛ ${pref}quitaradmins
 │๛ ${pref}kick
@@ -93,14 +91,12 @@ const handler = async (msg, { conn }) => {
 │๛ ${pref}abrirgrupo
 │๛ ${pref}cerrargrupo
 ╰─────◆
-
-🤖 *Danvers Bot control para tu grupo*
 `.trim();
 
   await conn.sendMessage2(
     chatId,
     {
-      image: { url: "https://cdn.russellxz.click/e626f7ef.jpeg" },
+      image: { url: "https://cdn.russellxz.click/7a65816d.jpeg" },
       gifPlayback: true,
       caption
     },
