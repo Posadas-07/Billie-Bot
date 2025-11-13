@@ -4,7 +4,7 @@ const handler = async (msg, { conn }) => {
 
   await conn.sendMessage2(chatId, { react: { text: "📋", key: msg.key } }, msg);
 
-  const texto = `*ᴍɪᴄʜɪ ɪᴄᴇ*
+  const texto = `*BILLIE BOT MENUFF*
 
 𖠁𝗠𝗘𝗡𝗨 𝗙𝗥𝗘𝗘 𝗙𝗜𝗥𝗘𖠁
 𖠁𝗣𝗿𝗲𝗳𝗶𝗷𝗼 𝗔𝗰𝘁𝘂𝗮𝗹: 『 ${pref} 』
@@ -33,7 +33,7 @@ const handler = async (msg, { conn }) => {
 🤖 *Michi ice Free Fire*`.trim();
 
   await conn.sendMessage2(chatId, {
-    image: { url: 'https://cdn.russellxz.click/7a65816d.jpeg' },
+    image: { url: 'https://cdn.russellxz.click/fc24888a.jpeg' },
     caption: texto
   }, msg);
 };
