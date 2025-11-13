@@ -32,7 +32,7 @@ const handler = async (msg, { conn }) => {
     console.error("[menu] Error leyendo setmenu.json:", e);
   }
 
-  const caption = `╔══ 𝗗𝗔𝗡𝗩𝗘𝗥𝗦 𝗜𝗔 𝗕𝗢𝗧 ═══
+  const caption = `╔══ *BILLIE INTELIGENCE BOT* ═══
 ║𝙈𝙀𝙉𝙐 𝙂𝙀𝙉𝙀𝙍𝘼𝙇
 ║𝗣𝗿𝗲𝗳𝗶𝗷𝗼 𝗔𝗰𝘁𝘂𝗮𝗹: 『 ${pref} 』
 ║𝗨𝘀𝗮 𝗲𝗻 𝗰𝗮𝗱𝗮 𝗰𝗼𝗺𝗮𝗻𝗱𝗼
@@ -145,7 +145,7 @@ const handler = async (msg, { conn }) => {
 `.trim();
 
 await conn.sendMessage2(chatId, {
-    image: { url: "https://cdn.russellxz.click/7a65816d.jpeg" },
+    image: { url: "‪https://cdn.russellxz.click/fc24888a.jpeg‬" },
     caption
 }, msg);
 };
