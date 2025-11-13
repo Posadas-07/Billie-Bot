@@ -6,7 +6,7 @@ const handler = async (msg, { conn }) => {
   const messageText = `📞 *Contacto del Creador:*\n
 Si tienes dudas, preguntas o sugerencias sobre el bot, puedes contactar a mi creador.
 
-📌 *Nombre:* Kevin 
+📌 *Nombre:* Cristian 
 📌 *Número:* ‪+1 (786) 556‑0181‬
 💬 *Mensaje directo:* Pulsa sobre el contacto y chatea con él.`;
 
