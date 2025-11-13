@@ -43,7 +43,7 @@ const handler = async (msg, { conn }) => {
     return;
   }
 
-  const caption = `ᴍɪᴄʜɪ ɪᴄᴇ ᴍᴇɴᴜ ɢʀᴜᴘᴏ
+  const caption = `*BILLIE BOT MENU GRUPO*
 
 ╭───🛠️ *CONFIGURACIONES*
 │๛ ${pref}infogrupo
@@ -96,7 +96,7 @@ const handler = async (msg, { conn }) => {
   await conn.sendMessage2(
     chatId,
     {
-      image: { url: "https://cdn.russellxz.click/7a65816d.jpeg" },
+      image: { url: "https://cdn.russellxz.click/fc24888a.jpeg" },
       gifPlayback: true,
       caption
     },
