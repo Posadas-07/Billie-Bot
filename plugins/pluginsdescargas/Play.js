@@ -39,7 +39,7 @@ module.exports = async (msg, { conn, text }) => {
   const { url: videoUrl, title, timestamp: duration, views, author } = video;
   const viewsFmt = views.toLocaleString();
 
-  const caption = `Chimi Ice Download 
+  const caption = `BILLIE DOWLOAD
 
 📀𝙸𝚗𝚏𝚘 𝚍𝚎𝚕 𝚟𝚒𝚍𝚎𝚘:
 
