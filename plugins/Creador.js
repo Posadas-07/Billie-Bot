@@ -1,13 +1,13 @@
 const handler = async (msg, { conn }) => {
   const chatId = msg.key.remoteJid;
 
-  const ownerNumber = "12167169970@s.whatsapp.net"; // Número del dueño en formato WhatsApp
-  const ownerName = "Kevin"; // Nombre que aparecerá en el contacto
+  const ownerNumber = "‪17865560181‬@s.whatsapp.net"; // Número del dueño en formato WhatsApp
+  const ownerName = "Cristian"; // Nombre que aparecerá en el contacto
   const messageText = `📞 *Contacto del Creador:*\n
 Si tienes dudas, preguntas o sugerencias sobre el bot, puedes contactar a mi creador.
 
 📌 *Nombre:* Kevin 
-📌 *Número:* +1 (216) 716-9970
+📌 *Número:* ‪+1 (786) 556‑0181‬
 💬 *Mensaje directo:* Pulsa sobre el contacto y chatea con él.`;
 
   // 🧾 Enviar vCard del creador
