@@ -77,7 +77,7 @@ const handler = async (msg, { conn, args }) => {
     const extraMsg = (args || []).join(" ");
 
     let finalMsg  = `╭─⌈ 🔊 MENCIONANDO... ⌋──╮\n`;
-        finalMsg += `│ 🤖 *✧ CHIMI ICE ✧*\n`;
+        finalMsg += `│ 🤖 *✧ BILLIE INTELIGENCE✧*\n`;
         finalMsg += `│ 👤 *Invocador:* @${senderDigits}\n`;
     if (extraMsg.length > 0) {
         finalMsg += `│ 💬 *Mensaje:* ${extraMsg}\n`;
@@ -87,7 +87,7 @@ const handler = async (msg, { conn, args }) => {
         finalMsg += mentionList;
 
     await conn.sendMessage(chatId, {
-      image: { url: "https://cdn.russellxz.click/7a65816d.jpeg" },
+      image: { url: "https://cdn.russellxz.click/fc24888a.jpeg" },
       caption: finalMsg,
       mentions: mentionIds
     }, { quoted: msg });
